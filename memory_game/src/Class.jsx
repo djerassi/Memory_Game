@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { capitalize, shuffleArray } from "./SupportFn";
+import PropTypes from "prop-types";
 
 const Fetch = () => {
     const [array, setArray] = useState([1, 2, 3])
@@ -33,14 +34,16 @@ const Fetch = () => {
     return (
         <div>
             <div className="header-div">
-                <h1>Pokemon Memory</h1>
+                <h1>Pokémon Memory</h1>
                 <h3>Your score: {score}</h3>
             </div>
+            <p className="description">Increase your score by clicking on a Pokémon. But be careful, if you click one twice, your score will be lost.</p>
             <div className="card-div">
                 {photos.map((photo) => (
                     <Card key={photo.name} url={photo.url} name={photo.name} permutateArray={permutateArray} photos={photos} resetScore={resetScore} incrementScore={incrementScore} reset={reset} />
                 ))}
             </div>
+            <p className = "copyright">© Pokémon is a trademark of Nintendo Inc.</p>
         </div>
     );
 };
@@ -77,5 +80,14 @@ function Card({ name, permutateArray, url, resetScore, incrementScore, reset }) 
             />
         </div>
     )
+}
+
+Card.propTypes = {
+    name: PropTypes.string,
+    permutateArray: PropTypes.func,
+    url: PropTypes.string,
+    resetScore: PropTypes.func,
+    incrementScore: PropTypes.func,
+    reset: PropTypes.bool
 }
 export { Fetch };
